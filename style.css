@@ -1,12 +1,33 @@
 body {
     font-family: monospace;
     padding: 50px;
+    background-color: #e9f0ff;
+    opacity: 1;
+    background-image: repeating-linear-gradient(
+            45deg,
+            #f5f7ff 25%,
+            transparent 25%,
+            transparent 75%,
+            #f5f7ff 75%,
+            #f5f7ff
+        ),
+        repeating-linear-gradient(
+            45deg,
+            #f5f7ff 25%,
+            #e9f0ff 25%,
+            #e9f0ff 75%,
+            #f5f7ff 75%,
+            #f5f7ff
+        );
+    background-position: 0 0, 40px 40px;
+    background-size: 80px 80px;
 }
 .task-title {
     font-size: 24px;
     text-decoration: underline wavy;
-    text-decoration-color: navy;
+    text-decoration-color: #8998e9;
     text-underline-offset: 0.3em;
+    text-decoration-thickness: 1.99px;
     cursor: pointer;
     display: inline-block;
 }
@@ -23,6 +44,7 @@ body {
     display: none;
 }
 .game-card {
+    background-color: #f5f7ff;
     border: 2px solid black;
     box-shadow: 8px 8px 0px 0px black;
     display: flex;
@@ -53,4 +75,10 @@ body {
     height: 1.2em;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #57629c;
+}
+hr {
+    margin-top: 35px;
+    border: dotted #8998e9;
+    border-width: 7px 0px 0px;
 }

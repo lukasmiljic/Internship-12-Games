@@ -29,6 +29,8 @@ function generateContainer(games, title) {
         <div class="game-rating">${game.metacritic}/100</div>
       `;
     });
+    const line = document.createElement("hr");
+    task.appendChild(line);
     document.body.appendChild(task);
 }
 
