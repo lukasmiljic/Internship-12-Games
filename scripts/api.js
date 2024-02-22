@@ -23,3 +23,9 @@ export async function fetchGameByName(title) {
         `${apiUrl}/games?key=${apiKey}&ordering=-released&search=${title}`
     );
 }
+
+export async function fetchPlatforms() {
+    return fetchData(
+        `${apiUrl}/platforms?key=${apiKey}&ordering=-games_count&page_size=10`
+    );
+}

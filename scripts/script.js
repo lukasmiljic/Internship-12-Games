@@ -1,4 +1,8 @@
-import { fetchGameByName, fetchGamesOrderMetacritic } from "./api.js";
+import {
+    fetchGameByName,
+    fetchGamesOrderMetacritic,
+    fetchPlatforms,
+} from "./api.js";
 
 function filterGames(games) {
     return games.filter(
@@ -6,18 +10,22 @@ function filterGames(games) {
     );
 }
 
-function generateContainer(games, title) {
-    const task = document.createElement("div");
-    task.classList.add("task");
+function generateContainer(title, taskId) {
+    const taskContainer = document.getElementById(taskId);
 
     const taskTitle = document.createElement("h2");
     taskTitle.classList.add("task-title");
     taskTitle.textContent = title;
-    task.appendChild(taskTitle);
+    taskContainer.appendChild(taskTitle);
 
-    const gamesContainer = document.createElement("div");
-    gamesContainer.classList.add("games-container");
-    task.appendChild(gamesContainer);
+    document.body.appendChild(taskContainer);
+    return taskContainer;
+}
+
+function generateGameCard(games, task) {
+    const innerContainer = document.createElement("div");
+    innerContainer.classList.add("games-container");
+    task.appendChild(innerContainer);
 
     games.forEach((game) => {
         let artwork = game.background_image;
@@ -26,34 +34,63 @@ function generateContainer(games, title) {
         }
         const gameCard = document.createElement("div");
         gameCard.classList.add("game-card");
-        gamesContainer.appendChild(gameCard);
+        innerContainer.appendChild(gameCard);
         gameCard.innerHTML = `
-      <img class="game-img" src="${artwork}" />
+        <img class="game-img" src="${artwork}" />
         <div class="game-title">${game.name}</div>
         <div class="game-release-date">${game.released}</div>
         <div class="game-rating">${game.metacritic}/100</div>
-      `;
+    `;
     });
-    // const line = document.createElement("hr");
-    // task.appendChild(line);
-    document.body.appendChild(task);
+}
+
+function generatePlatformCard(platforms, task) {
+    const innerContainer = document.createElement("div");
+    innerContainer.classList.add("games-container");
+    task.appendChild(innerContainer);
+
+    platforms.forEach((platform) => {
+        let artwork = platform.image_background;
+        if (artwork === null) {
+            artwork = "../assets/no_image.png";
+        }
+        const gameCard = document.createElement("div");
+        gameCard.classList.add("game-card");
+        innerContainer.appendChild(gameCard);
+        gameCard.innerHTML = `
+          <img class="game-img" src="${artwork}" />
+          <div class="game-title">${platform.name}</div>
+          <div class="game-release-date">${platform.games_count}</div>
+        `;
+    });
 }
 
 //task 1.
 fetchGamesOrderMetacritic()
     .then((games) =>
-        generateContainer(
-            filterGames(games),
-            "Task 1. - Metacritic Top 20 Games"
+        generateGameCard(
+            games,
+            generateContainer("Task 1. - Metacritic Top 20 Games", "task1")
         )
     )
     .catch(console.error);
 
-//task 2.
+// task 2.
 const gameName = prompt("Enter game title: ");
 fetchGameByName(gameName).then((games) =>
-    generateContainer(
+    generateGameCard(
         games.slice(0, 10),
-        `Task 2. - 10 Games containing similar to "${gameName}"`
+        generateContainer(
+            `Task 2. - 10 Games with names similar to "${gameName}"`,
+            "task2"
+        )
+    )
+);
+
+// //task 3.
+fetchPlatforms().then((platforms) =>
+    generatePlatformCard(
+        platforms,
+        generateContainer("Task 3. Platforms with the most games", "task3")
     )
 );
