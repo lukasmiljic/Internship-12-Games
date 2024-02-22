@@ -1,5 +1,10 @@
-import { fetchGamesOrderMetacritic } from "./api.js";
-fetchGamesOrderMetacritic();
+import { fetchGameByName, fetchGamesOrderMetacritic } from "./api.js";
+
+function filterGames(games) {
+    return games.filter(
+        (game) => game.esrb_rating !== null && game.esrb_rating.id != 5
+    );
+}
 
 function generateContainer(games, title) {
     const task = document.createElement("div");
@@ -29,13 +34,26 @@ function generateContainer(games, title) {
         <div class="game-rating">${game.metacritic}/100</div>
       `;
     });
-    const line = document.createElement("hr");
-    task.appendChild(line);
+    // const line = document.createElement("hr");
+    // task.appendChild(line);
     document.body.appendChild(task);
 }
 
+//task 1.
 fetchGamesOrderMetacritic()
     .then((games) =>
-        generateContainer(games, "Task 1. - Metacritic Top 20 Games")
+        generateContainer(
+            filterGames(games),
+            "Task 1. - Metacritic Top 20 Games"
+        )
     )
     .catch(console.error);
+
+//task 2.
+const gameName = prompt("Enter game title: ");
+fetchGameByName(gameName).then((games) =>
+    generateContainer(
+        games.slice(0, 10),
+        `Task 2. - 10 Games containing similar to "${gameName}"`
+    )
+);

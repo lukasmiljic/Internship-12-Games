@@ -39,6 +39,7 @@ body {
     gap: 33px;
     overflow: scroll;
     scrollbar-width: none;
+    margin-bottom: 55px;
 }
 .games-container::-webkit-scrollbar {
     display: none;
