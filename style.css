@@ -1,0 +1,56 @@
+body {
+    font-family: monospace;
+    padding: 50px;
+}
+.task-title {
+    font-size: 24px;
+    text-decoration: underline wavy;
+    text-decoration-color: navy;
+    text-underline-offset: 0.3em;
+    cursor: pointer;
+    display: inline-block;
+}
+.games-container {
+    /* border: 2px solid black; remove */
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 33px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+.games-container::-webkit-scrollbar {
+    display: none;
+}
+.game-card {
+    border: 2px solid black;
+    box-shadow: 8px 8px 0px 0px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 280px;
+    padding: 15px 0px;
+    cursor: pointer;
+}
+.game-card:hover {
+    transform: translateY(-5px);
+    transition: transform 30ms ease-in-out;
+}
+.game-img {
+    background-color: #aaaaa9;
+    width: 250px;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 1em;
+}
+.game-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    height: 1.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
