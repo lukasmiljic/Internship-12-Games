@@ -5,11 +5,14 @@ async function fetchData(url) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     return data.results;
   } catch (error) {
     console.error(error);
   }
 }
 
-fetchData(`${apiUrl}/games?key=${apiKey}`);
+export async function fetchGamesOrderMetacritic() {
+  return fetchData(
+    `${apiUrl}/games?=key${apiKey}&ordering=-metacritic&page_size=20`
+  );
+}
