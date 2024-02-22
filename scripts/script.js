@@ -1,4 +1,5 @@
 import {
+    fetchGameById,
     fetchGameByName,
     fetchGamesOrderMetacritic,
     fetchPlatforms,
@@ -75,22 +76,32 @@ fetchGamesOrderMetacritic()
     )
     .catch(console.error);
 
-// task 2.
-const gameName = prompt("Enter game title: ");
-fetchGameByName(gameName).then((games) =>
-    generateGameCard(
-        games.slice(0, 10),
-        generateContainer(
-            `Task 2. - 10 Games with names similar to "${gameName}"`,
-            "task2"
-        )
-    )
-);
+// // task 2.
+// const gameName = prompt("Enter game title: ");
+// fetchGameByName(gameName).then((games) =>
+//     generateGameCard(
+//         games.slice(0, 10),
+//         generateContainer(
+//             `Task 2. - 10 Games with names similar to "${gameName}"`,
+//             "task2"
+//         )
+//     )
+// );
 
-// //task 3.
-fetchPlatforms().then((platforms) =>
-    generatePlatformCard(
-        platforms,
-        generateContainer("Task 3. Platforms with the most games", "task3")
-    )
-);
+//task 3.
+// fetchPlatforms().then((platforms) =>
+//     generatePlatformCard(
+//         platforms,
+//         generateContainer("Task 3. Platforms with the most games", "task3")
+//     )
+// );
+
+//task 4.
+const game = fetchGameById(25097);
+console.log(game);
+// fetchGameById(25097).then((games) =>
+//     generateGameCard(
+//         games,
+//         generateContainer(`Task 4. - Search game by ID"`, "task4")
+//     )
+// );
